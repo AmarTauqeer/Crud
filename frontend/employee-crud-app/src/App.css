@@ -1,0 +1,149 @@
+h5 {
+  text-align: center;
+  font-weight: 500;
+  font-style: italic;
+}
+h6 {
+  text-align: center;
+  font-weight: 500;
+  font-size: larger;
+  font-style: italic;
+}
+input {
+  width: 300px;
+}
+
+label {
+  font-weight: bold;
+  font-style: italic;
+}
+.message-div {
+  color: green;
+}
+button {
+  width: 70px;
+}
+
+.navigation {
+  height: 600px;
+  width: 230px;
+  color: white;
+  font-style: italic;
+  background-color: #393332;
+}
+.nav-link {
+  color: white;
+}
+.header,
+.footer {
+  background-color: #393332;
+  color: white;
+  text-align: center;
+  height: 85px;
+}
+
+.header h2 {
+  text-align: start;
+  padding-left: 5px;
+}
+
+.paginationBttns {
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBttns a {
+  padding: 5px;
+  margin: 4px;
+  border-radius: 5px;
+  border: 1px solid #2b2eff;
+  color: #2b2eff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.paginationBttns a:hover {
+  color: white;
+  background-color: #2b2eff;
+}
+
+.paginationActive a {
+  color: white;
+  background-color: #2b2eff;
+}
+
+.paginationDisabled a {
+  color: black;
+  background-color: grey;
+}
+.menu-icon {
+  visibility: hidden;
+}
+/* media queries */
+
+/* Smart phones */
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .menu-icon {
+    visibility: visible;
+    width: 300px;
+  }
+  .navigation-rest {
+    visibility: hidden;
+  }
+  .navigation {
+    height: 300px;
+    width: 335px;
+    color: white;
+    font-size: large;
+    font-style: italic;
+    background-color: #393332;
+  }
+  .header h2 {
+    text-align: center;
+  }
+  button {
+    width: 90px;
+  }
+}
+
+/* tablets and mobiles */
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .navigation {
+    height: 700px;
+    width: 150px;
+    color: white;
+    font-size: large;
+    font-style: italic;
+    background-color: #393332;
+  }
+  .header h2 {
+    text-align: center;
+  }
+  button {
+    width: 90px;
+  }
+}
+
+/* Tablets and IPade */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .navigation {
+    height: 750px;
+    width: 150px;
+    color: white;
+    font-size: large;
+    font-style: italic;
+    background-color: #393332;
+  }
+  .header h2 {
+    text-align: center;
+  }
+  button {
+    width: 90px;
+  }
+}
