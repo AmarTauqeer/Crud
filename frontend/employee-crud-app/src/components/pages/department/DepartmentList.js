@@ -7,7 +7,6 @@ import Input from "../../Input";
 
 const DepartmentList = (props) => {
   const history = useHistory();
-
   const [departments, setDepartments] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
 
@@ -16,7 +15,6 @@ const DepartmentList = (props) => {
 
   const departmentsPerPage = 5;
   const pagesVisited = pageNumber * departmentsPerPage;
-
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/all_department/").then((res) => {
       if (res) {
@@ -103,12 +101,14 @@ const DepartmentList = (props) => {
       <hr />
       <div className="row">
         <div className="col-md-1">
-          <Button
-            type="button"
-            className="btn btn-success btn-sm"
-            onClick={handleAdd}
-            label="Add"
-          />
+          {localStorage.getItem("user_name") && (
+            <Button
+              type="button"
+              className="btn btn-success btn-sm"
+              onClick={handleAdd}
+              label="Add"
+            />
+          )}
         </div>
       </div>
       <br />
@@ -149,7 +149,7 @@ const DepartmentList = (props) => {
         </div>
       </div>
       <br />
-      {displayDepartments}
+      {localStorage.getItem("user_name") && displayDepartments}
       <br />
       <ReactPaginate
         previousLabel={"Previous"}

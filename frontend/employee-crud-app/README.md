@@ -9,6 +9,8 @@
 * REST API
 * Bootstrap
 * Axios GET, POST, PUT, DELETE requests
+* Secure routes
+* Authentication using local storage
 
 ## Installation
 

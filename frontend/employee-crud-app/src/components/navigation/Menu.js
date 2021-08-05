@@ -22,16 +22,21 @@ const Menu = () => {
                     Home
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link to="/all_department" className="nav-link p-1">
-                    Department
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/all_employee" className="nav-link p-1">
-                    Employee
-                  </Link>
-                </li>
+                {alert(localStorage.getItem("user_name"))}
+                {localStorage.getItem("user_name") && (
+                  <div>
+                    <li className="nav-item">
+                      <Link to="/all_department" className="nav-link p-1">
+                        Department
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/all_employee" className="nav-link p-1">
+                        Employee
+                      </Link>
+                    </li>
+                  </div>
+                )}
               </ul>
             </nav>
           </div>
@@ -49,16 +54,20 @@ const Menu = () => {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="/all_department" className="nav-link p-1">
-                Department
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/all_employee" className="nav-link p-1">
-                Employee
-              </Link>
-            </li>
+            {localStorage.getItem("user_name") && (
+              <div>
+                <li className="nav-item">
+                  <Link to="/all_department" className="nav-link p-1">
+                    Department
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/all_employee" className="nav-link p-1">
+                    Employee
+                  </Link>
+                </li>
+              </div>
+            )}
           </ul>
         </nav>
       </div>

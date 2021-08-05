@@ -117,12 +117,14 @@ const EmployeeList = (props) => {
       <hr />
       <div className="row">
         <div className="col-md-1">
-          <Button
-            type="button"
-            className="btn btn-success btn-sm"
-            onClick={handleAdd}
-            label="Add"
-          />
+          {localStorage.getItem("user_name") && (
+            <Button
+              type="button"
+              className="btn btn-success btn-sm"
+              onClick={handleAdd}
+              label="Add"
+            />
+          )}
         </div>
       </div>
       <br />
@@ -182,7 +184,7 @@ const EmployeeList = (props) => {
         </div>
       </div>
       <br />
-      {displayEmployees}
+      {localStorage.getItem("user_name") && displayEmployees}
       <br />
       <ReactPaginate
         previousLabel={"Previous"}

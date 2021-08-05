@@ -1,5 +1,13 @@
 from rest_framework import serializers
-from EmployeeCrud.models import Departments, Employees
+from EmployeeCrud.models import Users, Departments, Employees
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Users
+        fields = ('id',
+                  'user_name',
+                  'create_date',
+                  'is_admin')
 
 
 class DepartmentSerializer(serializers.ModelSerializer):

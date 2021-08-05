@@ -12,6 +12,8 @@ import Header from "./components/navigation/Header";
 import Footer from "./components/navigation/Footer";
 import Menu from "./components/navigation/Menu";
 import Home from "./components/pages/Home";
+import Signup from "./components/pages/authentication/Signup";
+import Login from "./components/pages/authentication/Login";
 
 function App() {
   return (
@@ -24,27 +26,35 @@ function App() {
           </div>
           <div className="col-md-9">
             <br />
-            <div>
-              <Route exact path="/" component={Home} />
+            {/* secure routes */}
+            {localStorage.getItem("user_name") && (
+              <div>
+                <Route
+                  exact
+                  path="/all_department"
+                  component={DepartmentList}
+                />
+                <Route exact path="/add_department" component={AddDepartment} />
+                <Route
+                  exact
+                  path="/update_department/:id"
+                  component={EditDepartment}
+                />
 
-              <Route exact path="/all_department" component={DepartmentList} />
-              <Route exact path="/add_department" component={AddDepartment} />
-              <Route
-                exact
-                path="/update_department/:id"
-                component={EditDepartment}
-              />
-
-              <Route exact path="/all_employee" component={EmployeeList} />
-              <Route exact path="/add_employee" component={AddEmployee} />
-              <Route
-                exact
-                path="/update_employee/:id"
-                component={EditEmployee}
-              />
-            </div>
-            <hr />
+                <Route exact path="/all_employee" component={EmployeeList} />
+                <Route exact path="/add_employee" component={AddEmployee} />
+                <Route
+                  exact
+                  path="/update_employee/:id"
+                  component={EditEmployee}
+                />
+              </div>
+            )}
+            <Route exact path="/" component={Home} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
           </div>
+          <hr />
         </div>
 
         <Footer />

@@ -3,10 +3,82 @@ from django.shortcuts import render
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser
 from rest_framework import status
+from django.db.models import Q
 
-from EmployeeCrud.models import Departments, Employees
-from EmployeeCrud.serializers import DepartmentSerializer, EmployeeSerializer
+from EmployeeCrud.models import Departments, Employees, Users
+from EmployeeCrud.serializers import UserSerializer, DepartmentSerializer, EmployeeSerializer
 from rest_framework.decorators import api_view
+
+"""
+    user endpoints
+"""
+
+
+@api_view(['POST'])
+def add_user(request):
+    if request.method == 'POST':
+        user_data = JSONParser().parse(request)
+        user_serializer = UserSerializer(data=user_data)
+        if user_serializer.is_valid():
+            user_serializer.save()
+            return JsonResponse(user_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def check_user(request):
+    if request.method == 'POST':
+        user_data = JSONParser().parse(request)
+        condition1 = Q(user_password__icontains=user_data['user_password'])
+        condition2 = Q(user_name__icontains=user_data['user_name'])
+        user_found = Users.objects.filter(condition1 & condition2)
+        print(len(user_found))
+        if len(user_found) != 0:
+            return JsonResponse("Found", safe=False)
+        else:
+            return JsonResponse("Not found", safe=False)
+
+
+@api_view(['GET'])
+def get_user_by_id(request, id):
+    if request.method == 'GET':
+        user = Users.objects.get(pk=id)
+        user_serializer = UserSerializer(user)
+        return JsonResponse(user_serializer.data, safe=False)
+
+
+@api_view(['GET'])
+def all_user(request):
+    if request.method == 'GET':
+        users = Users.objects.all()
+
+        user_name = request.GET.get('user_name', None)
+        if user_name is not None:
+            users = users.filter(user_name__icontains=user_name)
+
+        users_serializer = UserSerializer(users, many=True)
+        return JsonResponse(users_serializer.data, safe=False)
+
+
+@api_view(['PUT'])
+def update_user(request, id):
+    if request.method == 'PUT':
+        user_data = JSONParser().parse(request)
+        user = Users.objects.get(pk=id)
+        user_serializer = UserSerializer(user, data=user_data)
+        if user_serializer.is_valid():
+            user_serializer.save()
+            return JsonResponse(user_serializer.data)
+        return JsonResponse(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+def delete_user(request, id):
+    if request.method == 'DELETE':
+        user = Users.objects.get(pk=id)
+        user.delete()
+        return JsonResponse({'message': 'User was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
 
 """
     department crud operations
@@ -43,6 +115,7 @@ def delete_department(request, id):
         department.delete()
         return JsonResponse({'message': 'Department was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
+
 @api_view(['GET'])
 def get_department_by_id(request, id):
     if request.method == 'GET':
@@ -69,6 +142,7 @@ def all_department(request):
 """
     employee crud operations
 """
+
 
 @api_view(['GET'])
 def get_employee_by_id(request, id):

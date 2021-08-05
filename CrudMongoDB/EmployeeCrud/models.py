@@ -2,6 +2,13 @@ from django.db import models
 
 
 # Create your models here.
+class Users(models.Model):
+    user_name = models.CharField(max_length=100, blank=False, default='')
+    user_password = models.CharField(max_length=200, blank=False, default='')
+    create_date = models.DateField(auto_now_add=True)
+    is_admin = models.BooleanField(default=False)
+
+
 class Departments(models.Model):
     department_name = models.CharField(max_length=100, blank=False, default='')
     description = models.CharField(max_length=200, blank=False, default='')
