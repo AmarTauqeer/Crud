@@ -32,7 +32,7 @@ def check_user(request):
         condition1 = Q(user_password__icontains=user_data['user_password'])
         condition2 = Q(user_name__icontains=user_data['user_name'])
         user_found = Users.objects.filter(condition1 & condition2)
-        print(len(user_found))
+        # print(len(user_found))
         if len(user_found) != 0:
             return JsonResponse("Found", safe=False)
         else:
@@ -63,9 +63,8 @@ def all_user(request):
 @api_view(['PUT'])
 def update_user(request, id):
     if request.method == 'PUT':
-        user_data = JSONParser().parse(request)
         user = Users.objects.get(pk=id)
-        user_serializer = UserSerializer(user, data=user_data)
+        user_serializer = UserSerializer(user, data=request.data)
         if user_serializer.is_valid():
             user_serializer.save()
             return JsonResponse(user_serializer.data)

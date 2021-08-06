@@ -14,7 +14,7 @@ urlpatterns = [
     path('delete_department/<int:id>', views.delete_department),
     path('get_department_by_id/<int:id>', views.get_department_by_id),
     path('get_employee_by_id/<int:id>', views.get_employee_by_id),
-    path('get_user_by_id/<int:id>', views.get_employee_by_id),
+    path('get_user_by_id/<int:id>', views.get_user_by_id),
     path('all_department/', views.all_department),
     path('add_employee/', views.add_employee),
     path('update_employee/<int:id>', views.update_employee),
