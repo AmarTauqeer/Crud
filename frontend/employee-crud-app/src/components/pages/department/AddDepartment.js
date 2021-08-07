@@ -50,6 +50,10 @@ const AddDepartment = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <br />
+      <h6>Add Department</h6>
+      <br />
+      <br />
       <div className="form-group row">
         <label className="col-md-3 col-form-label">Department Name:</label>
         <div className="col-md-9">

@@ -3,6 +3,7 @@ import axios from "axios";
 import Input from "../../Input";
 import Button from "../../Button";
 import { useHistory } from "react-router";
+import moment from "moment";
 
 const Signup = (props) => {
   const history = useHistory();
@@ -10,7 +11,7 @@ const Signup = (props) => {
   const [inputs, setInputs] = useState({
     user_name: "",
     user_password: "",
-    created_date: "",
+    create_date: new Date(),
     is_admin: false,
   });
   const handleChange = (e) => {
@@ -38,9 +39,10 @@ const Signup = (props) => {
       const data = {
         user_name: inputs.user_name,
         user_password: inputs.user_password,
+        create_date: moment(inputs.create_date).format("YYYY-MM-DD"),
         is_admin: inputs.is_admin,
       };
-
+      console.log(data);
       axios.post("http://127.0.0.1:8000/add_user/", data).then((res) => {
         if (res) {
           setMessage("User created successfully");

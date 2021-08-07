@@ -3,11 +3,16 @@ import axios from "axios";
 import Input from "../../Input";
 import Button from "../../Button";
 import { useHistory } from "react-router";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 const AddEmployee = (props) => {
   const history = useHistory();
   const [message, setMessage] = useState("");
   const [departments, setDepartments] = useState([]);
+  const [dob, setDob] = useState(new Date());
+  const [joiningDate, setJoiningDate] = useState(new Date());
   const [inputs, setInputs] = useState({
     department: 6,
     date_of_birth: "",
@@ -40,7 +45,7 @@ const AddEmployee = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(inputs);
+    //console.log(inputs);
     if (!inputs.employee_name || !inputs.department) {
       alert("Please fill all the requird fields.");
       return false;
@@ -51,12 +56,13 @@ const AddEmployee = (props) => {
       const data = {
         employee_name: inputs.employee_name,
         department: inputs.department,
-        date_of_birth: inputs.date_of_birth,
-        joining_date: inputs.joining_date,
+        date_of_birth: moment(dob).format("YYYY-MM-DD"),
+        joining_date: moment(joiningDate).format("YYYY-MM-DD"),
         address: inputs.address,
         phone: inputs.phone,
       };
 
+      console.log(data);
       axios.post("http://127.0.0.1:8000/add_employee/", data).then((res) => {
         if (res) {
           setMessage("Employee inserted successfully");
@@ -69,6 +75,10 @@ const AddEmployee = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <br />
+      <h6>Add Employee</h6>
+      <br />
+      <br />
       <div className="form-group row">
         <label className="col-md-3 col-form-label">Employee Name:</label>
         <div className="col-md-9">
@@ -102,22 +112,20 @@ const AddEmployee = (props) => {
       <div className="form-group row">
         <label className="col-md-3 col-form-label">Date of birth:</label>
         <div className="col-md-9">
-          <Input
-            name="date_of_birth"
-            value={inputs.date_of_birth}
-            handleChange={handleChange}
-            className="form-control form-control-md"
+          <DatePicker
+            selected={dob}
+            dateFormat="yyyy-MM-dd"
+            onChange={(date) => setDob(date)}
           />
         </div>
       </div>
       <div className="form-group row">
         <label className="col-md-3 col-form-label">Joining date:</label>
         <div className="col-md-9">
-          <Input
-            name="joining_date"
-            value={inputs.joining_date}
-            handleChange={handleChange}
-            className="form-control form-control-md"
+          <DatePicker
+            selected={joiningDate}
+            dateFormat="yyyy-MM-dd"
+            onChange={(date) => setJoiningDate(date)}
           />
         </div>
       </div>

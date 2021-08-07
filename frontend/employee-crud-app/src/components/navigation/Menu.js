@@ -22,7 +22,6 @@ const Menu = () => {
                     Home
                   </Link>
                 </li>
-                {alert(localStorage.getItem("user_name"))}
                 {localStorage.getItem("user_name") && (
                   <div>
                     <li className="nav-item">

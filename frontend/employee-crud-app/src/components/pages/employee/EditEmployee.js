@@ -3,11 +3,16 @@ import axios from "axios";
 import Input from "../../Input";
 import Button from "../../Button";
 import { useHistory } from "react-router";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 const EditEmployee = (props) => {
   const history = useHistory();
   const [message, setMessage] = useState("");
   const [departments, setDepartments] = useState([]);
+  const [dob, setDob] = useState(new Date());
+  const [joiningDate, setJoiningDate] = useState(new Date());
   const [inputs, setInputs] = useState({
     employee_name: "",
     department: 6,
@@ -25,16 +30,16 @@ const EditEmployee = (props) => {
         setInputs({
           employee_name: res.data.employee_name,
           department: res.data.department,
-          date_of_birth: res.data.date_of_birth,
-          joining_date: res.data.joining_date,
           address: res.data.address,
           phone: res.data.phone,
         });
 
+        setJoiningDate(res.data.joining_date);
+        setDob(res.data.date_of_birth);
+
         // get departments
         axios.get("http://127.0.0.1:8000/all_department/").then((res) => {
           if (res) {
-            console.log(res.data);
             setDepartments(res.data);
           }
         });
@@ -67,8 +72,8 @@ const EditEmployee = (props) => {
       const data = {
         employee_name: inputs.employee_name,
         department: inputs.department,
-        date_of_birth: inputs.date_of_birth,
-        joining_date: inputs.joining_date,
+        date_of_birth: moment(dob).format("YYYY-MM-DD"),
+        joining_date: moment(joiningDate).format("YYYY-MM-DD"),
         address: inputs.address,
         phone: inputs.phone,
       };
@@ -88,6 +93,10 @@ const EditEmployee = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <br />
+      <h6>Edit Employee</h6>
+      <br />
+      <br />
       <div className="form-group row">
         <label className="col-md-3 col-form-label">Employee Name:</label>
         <div className="col-md-9">
@@ -121,22 +130,20 @@ const EditEmployee = (props) => {
       <div className="form-group row">
         <label className="col-md-3 col-form-label">Date of birth:</label>
         <div className="col-md-9">
-          <Input
-            name="date_of_birth"
-            value={inputs.date_of_birth}
-            handleChange={handleChange}
-            className="form-control form-control-md"
+          <DatePicker
+            selected={Date.parse(`${dob}`)}
+            dateFormat="yyyy-MM-dd"
+            onChange={(date) => setDob(date)}
           />
         </div>
       </div>
       <div className="form-group row">
         <label className="col-md-3 col-form-label">Joining date:</label>
         <div className="col-md-9">
-          <Input
-            name="joining_date"
-            value={inputs.joining_date}
-            handleChange={handleChange}
-            className="form-control form-control-md"
+          <DatePicker
+            selected={Date.parse(`${joiningDate}`)}
+            dateFormat="yyyy-MM-dd"
+            onChange={(date) => setJoiningDate(date)}
           />
         </div>
       </div>

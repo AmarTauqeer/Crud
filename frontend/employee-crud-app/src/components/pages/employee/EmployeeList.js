@@ -113,8 +113,10 @@ const EmployeeList = (props) => {
 
   return (
     <div>
+      <br />
       <h6>Employee</h6>
-      <hr />
+      <br />
+      <br />
       <div className="row">
         <div className="col-md-1">
           {localStorage.getItem("user_name") && (
@@ -146,7 +148,10 @@ const EmployeeList = (props) => {
       <div className="row">
         <div
           className="col-md-2"
-          style={{ fontWeight: "bold", fontStyle: "italic" }}
+          style={{
+            fontWeight: "bold",
+            fontStyle: "italic",
+          }}
         >
           Emp.Name
         </div>
@@ -187,13 +192,15 @@ const EmployeeList = (props) => {
       {localStorage.getItem("user_name") && displayEmployees}
       <br />
       <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
+        previousLabel={"<<"}
+        nextLabel={">>"}
+        nextClassName={"page-item"}
+        pageLinkClassName={"page-link"}
         pageCount={pageCount}
         onPageChange={changePage}
-        containerClassName={"paginationBttns"}
-        previousLinkClassName={"previousBttn"}
-        nextLinkClassName={"nextBttn"}
+        containerClassName={"pagination"}
+        previousLinkClassName={"page-link"}
+        nextLinkClassName={"page-link"}
         disabledClassName={"paginationDisabled"}
         activeClassName={"paginationActive"}
       />

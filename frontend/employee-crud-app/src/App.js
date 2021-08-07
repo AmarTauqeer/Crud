@@ -54,9 +54,7 @@ function App() {
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
           </div>
-          <hr />
         </div>
-
         <Footer />
       </Router>
     </div>

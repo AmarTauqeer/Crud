@@ -4,6 +4,9 @@ import { useHistory } from "react-router";
 import Button from "../../Button";
 import ReactPaginate from "react-paginate";
 import Input from "../../Input";
+import { GrAdd } from "react-icons/gr";
+import { FaEdit, FaRegEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const DepartmentList = (props) => {
   const history = useHistory();
@@ -84,6 +87,8 @@ const DepartmentList = (props) => {
               label="Delete"
               onClick={(e) => handleDelete(dpt.id)}
             />
+            {/* <FaEdit size={20} />
+            <MdDelete size={20} /> */}
           </div>
         </div>
       );
@@ -97,8 +102,10 @@ const DepartmentList = (props) => {
 
   return (
     <div>
+      <br />
       <h6>Department</h6>
-      <hr />
+      <br />
+      <br />
       <div className="row">
         <div className="col-md-1">
           {localStorage.getItem("user_name") && (
@@ -108,6 +115,7 @@ const DepartmentList = (props) => {
               onClick={handleAdd}
               label="Add"
             />
+            //<GrAdd type="button" onClick={handleAdd} size={20} label="Add" />
           )}
         </div>
       </div>
@@ -151,14 +159,17 @@ const DepartmentList = (props) => {
       <br />
       {localStorage.getItem("user_name") && displayDepartments}
       <br />
+
       <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
+        previousLabel={"<<"}
+        nextLabel={">>"}
+        nextClassName={"page-item"}
+        pageLinkClassName={"page-link"}
         pageCount={pageCount}
         onPageChange={changePage}
-        containerClassName={"paginationBttns"}
-        previousLinkClassName={"previousBttn"}
-        nextLinkClassName={"nextBttn"}
+        containerClassName={"pagination"}
+        previousLinkClassName={"page-link"}
+        nextLinkClassName={"page-link"}
         disabledClassName={"paginationDisabled"}
         activeClassName={"paginationActive"}
       />

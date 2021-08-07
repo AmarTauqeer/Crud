@@ -47,32 +47,10 @@ button {
   padding-left: 5px;
 }
 
-.paginationBttns {
-  width: 80%;
-  height: 40px;
-  list-style: none;
-  display: flex;
-  justify-content: center;
-}
-
-.paginationBttns a {
-  padding: 5px;
-  margin: 4px;
-  border-radius: 5px;
-  border: 1px solid #2b2eff;
-  color: #2b2eff;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.paginationBttns a:hover {
-  color: white;
-  background-color: #2b2eff;
-}
-
 .paginationActive a {
-  color: white;
-  background-color: #2b2eff;
+  z-index: 3;
+  outline: 0;
+  box-shadow: none;
 }
 
 .paginationDisabled a {
@@ -82,6 +60,36 @@ button {
 .menu-icon {
   visibility: hidden;
 }
+/* pagination */
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  color: #673ab7 !important;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #673ab7 !important;
+}
+
+.page-link:hover {
+  z-index: 2;
+  color: #fff !important;
+  background-color: #673ab7;
+  border-color: #024dbc;
+}
+
+.page-link:focus {
+  z-index: 3;
+  outline: 0;
+  box-shadow: none;
+}
+
 /* media queries */
 
 /* Smart phones */
@@ -96,7 +104,7 @@ button {
   }
   .navigation {
     height: 300px;
-    width: 335px;
+    width: 297px;
     color: white;
     font-size: large;
     font-style: italic;
@@ -104,6 +112,7 @@ button {
   }
   .header h2 {
     text-align: center;
+    font-size: large;
   }
   button {
     width: 90px;

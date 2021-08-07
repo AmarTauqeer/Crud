@@ -30,7 +30,8 @@
 * clone the repository
 * cd Crud/CrudMongoDB/CrudMongoDB
 * pip install -r requirements.txt
-* python manage.py runserver
- 
+* python manage.py runserver 
 
+## Live demo
 
+https://drive.google.com/file/d/18j82Jwt_WwMTWqldyZ_8jDfuRbfcv_B4/view
